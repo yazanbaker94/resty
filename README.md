@@ -3,7 +3,10 @@ Our application will be an API testing tool that can be run in any browser, allo
 
 PULL REQs:
 
-https://github.com/yazanbaker94/resty/pull/1/
+https://github.com/yazanbaker94/resty/pull/2/
+
+TEST: 
+Gets the data after event has been fired and then checks if it contains the string value.
 
 
 
