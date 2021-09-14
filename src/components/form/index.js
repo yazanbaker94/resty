@@ -6,7 +6,10 @@ import  { useState } from 'react';
 function Form(props) {
 
   const [stateURL, setURL] = useState({url: ""});
+  const [request, setRequest] = useState("");
   const [stateMethod, setMethod] = useState({method: ""});
+  const [textArea, setTextArea] = useState(false);
+
 
 
   const inputHandler = (e) => {
@@ -14,12 +17,7 @@ function Form(props) {
     setURL(e.target.value);
 }
 
-const methodHandler = (e) => {
-  e.preventDefault();
 
-  console.log(e.target.id)
-  setMethod(e.target.id);
-}
 
 
 
@@ -29,10 +27,24 @@ const methodHandler = (e) => {
       const formData = {
         method: stateMethod,
         url: stateURL,
+        request
       };
       props.handleApiCall(formData);
        
     }
+
+
+    const handleRequest = (e) => {
+      let data = JSON.parse(e.target.value);
+      setRequest(data);
+    };
+
+
+    
+  const handleGet = (e) => {
+    setMethod("get");
+    setTextArea(false);
+  };
   
 
    
@@ -51,11 +63,14 @@ const methodHandler = (e) => {
             <button type="submit">GO!</button>
           </label>
           <label className="methods" >
-            <span id="get" onClick={methodHandler}>GET</span>
-            <span id="post" onClick={methodHandler}>POST</span>
-            <span id="put" onClick={methodHandler}>PUT</span>
-            <span id="delete" onClick={methodHandler} >DELETE</span>
+            <span id="get" onClick={handleGet}>GET</span>
+            <span id="post" >POST</span>
+            <span id="put" >PUT</span>
+            <span id="delete"  >DELETE</span>
           </label>
+          {textArea && (
+          <textarea rows="15" cols="35" onChange={handleRequest}></textarea>
+        )}
         </form>
       </>
 
