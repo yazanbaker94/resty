@@ -1,6 +1,6 @@
 import React from 'react';
 import  { useState } from 'react';
-
+import axios from 'axios'
 import './app.scss';
 
 // Let's talk about using index.js and some other name in the component folder
@@ -9,23 +9,35 @@ import Header from './components/header';
 import Footer from './components/footer';
 import Form from './components/form';
 import Results from './components/results';
-
-
+//https://pokeapi.co/api/v2/pokemon
 function App() {
+
+  // const [post, setPost] = useState(null);
+
+  
+
   // Hooks : functional compoenents
   const [stateData, setData] = useState({data: null});
-  const [stateReq, setRequestParams] = useState({requestParams: {} });
+  const [stateReq, setRequestParams] = useState({requestParams: {} });  
+
+ 
+
 
   function callApi(requestParams) {
-    const data = {
-      count: 2,
-      results: [
-        {name: 'fake thing 1', url: 'http://fakethings.com/1'},
-        {name: 'fake thing 2', url: 'http://fakethings.com/2'},
-      ],
-    };
-    setData({data});
+
+
+   
+      axios.get(requestParams.url).then((response) => {
+        setData({data:response.data});
+        console.log(stateData.data)
+      });
+    
+  
+    if (!stateData) return null;
+ 
+  
     setRequestParams({requestParams});
+  
 
   }
 
