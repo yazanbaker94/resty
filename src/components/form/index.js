@@ -2,11 +2,13 @@ import React from 'react'
 import './form.scss';
 import  { useState } from 'react';
 
+
+
 //https://pokeapi.co/api/v2/pokemon
 function Form(props) {
 
   const [stateURL, setURL] = useState({url: ""});
-  const [request, setRequest] = useState("");
+  const [body, setBody] = useState();
   const [stateMethod, setMethod] = useState({method: ""});
   const [textArea, setTextArea] = useState(false);
 
@@ -26,17 +28,15 @@ function Form(props) {
       e.preventDefault();
       const formData = {
         method: stateMethod,
-        url: stateURL,
-        request
+        url: stateURL
       };
-      props.handleApiCall(formData);
+      props.handleApiCall(formData, body);
        
     }
 
 
-    const handleRequest = (e) => {
-      let data = JSON.parse(e.target.value);
-      setRequest(data);
+    const handleBody = (e) => {
+      setBody(e.target.value);  
     };
 
 
@@ -61,6 +61,7 @@ function Form(props) {
             <span>URL: </span>
             <input name='url' type='text' onChange={inputHandler}/>
             <button type="submit">GO!</button>
+            
           </label>
           <label className="methods" >
             <span id="get" onClick={handleGet}>GET</span>
@@ -69,7 +70,7 @@ function Form(props) {
             <span id="delete"  >DELETE</span>
           </label>
           {textArea && (
-          <textarea rows="15" cols="35" onChange={handleRequest}></textarea>
+          <textarea rows="15" cols="35" onChange={handleBody}></textarea>
         )}
         </form>
       </>
