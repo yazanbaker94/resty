@@ -10,14 +10,27 @@ function Results(props) {
   return (
     <div>
        <section>
-        <pre  data-testid="data">{props.data ? <JSONPretty id="json-pretty" data={props.data}></JSONPretty> : null}</pre>
-     
+        <pre  data-testid="data"> </pre> 
+        {props.data &&
+        <>
+                     "Headers" :
+
+        <JSONPretty id="json-pretty" data={props.data.headers} />
+        "Count" :
+        <JSONPretty id="json-pretty" data={props.data.count} />
+        "Results" :
+         <JSONPretty id="json-pretty" data={props.data.results} />  </> }  
+         
+      
+    
         
 
       </section>
     </div>
   )
 }
+
+
 
 export default Results
 
